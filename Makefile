@@ -14,8 +14,9 @@ DEFS = -DLSB_FIRST
 LIBS = -L./lib -lalleg
 INCS = -I. -I./cpu -I./drivers -I./msdos -I../../mingw/allegro/include
 CC = gcc
-
 all: $(EXE).exe
+
+
 
 $(EXE).exe: $(OBJS)
 	$(CC) $(CFLAGS) -o $(EXE).exe $(OBJS) $(LIBS)

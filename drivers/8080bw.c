@@ -14,7 +14,6 @@
 #include "romlist.h"
 #include <allegro.h>
 
-
 /* samples */
 SAMPLE *saucer;
 SAMPLE *shot;
@@ -154,6 +153,8 @@ byte doin_invaders(byte Port) {
         int bValue=0x00;
 
 	switch(Port) {
+		case 0:
+			return(bValue);
 		case 1:
 			bValue=0x81;
                         if(get_keyboard(SYS_KEY_1)) bValue|=driver->gameSettings.PLAYER_1;//0x04
@@ -195,7 +196,7 @@ byte doin_invaders(byte Port) {
 			return(bValue);
 		default:
 			return(0x00);
-	}
+	} 
 }
 
 void doout_invaders(byte Port, byte Value) {

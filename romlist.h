@@ -5,7 +5,7 @@
 #define invaders
 
 /* Total supported games in Laser */
-#define LASER_TOTAL_SUPPORTED 76
+#define LASER_TOTAL_SUPPORTED 77
 
 extern tagRomList zzzapRom[];
 extern tagRomList seawolfRom[];
@@ -83,5 +83,6 @@ extern tagRomList ozmawar2Rom[];
 extern tagRomList solfightRom[];
 extern tagRomList spacephRom[];
 extern tagRomList yosakdonRom[];
+extern tagRomList testerRom[];
 
 #endif /* _ROMLIST_H_ */

@@ -347,6 +347,14 @@ tagRomList alieninvRom[] = {
 };
 
 tagRomList sitvRom[] = {
+  {"invaders/invaders.h",       0x0000, 0x0800, 5 },
+  {"sitv/tv02.rp1",             0x0800, 0x0800, 0 },
+  {"sitv/tv03.n1",              0x1000, 0x0800, 0 },
+  {"sitv/tv04.m1",              0x1800, 0x0800, 0 },
+  {"invaders/invaders.e",       0x1800, 0x0800, 0 }
+};
+
+tagRomList testerRom[] = {
   {"sitv/tv0h.s1",              0x0000, 0x0800, 5 },
   {"sitv/tv02.rp1",             0x0800, 0x0800, 0 },
   {"sitv/tv03.n1",              0x1000, 0x0800, 0 },
