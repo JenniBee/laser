@@ -5,7 +5,7 @@
 EXE = laser
 SYS = msdos/msdos.o msdos/samples.o
 CPUS = cpu/z80/z80.o cpu/m6502/m6502.o
-DRIVERS = drivers/8080bw.o drivers/pong.o
+DRIVERS = drivers/8080bw.o drivers/pong.o drivers/pongdbls.o
 OBJS = $(CPUS) $(DRIVERS) $(SYS) driver.o roms.o state.o
 
 #CFLAGS = -Wall -O3

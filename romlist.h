@@ -7,6 +7,7 @@
 /* Total supported games in Laser */
 #define LASER_TOTAL_SUPPORTED 78
 
+extern tagRomList pongdblsRom[];
 extern tagRomList pongRom[];
 extern tagRomList beaminvRom[];
 extern tagRomList zzzapRom[];

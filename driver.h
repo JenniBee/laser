@@ -97,6 +97,18 @@ void NMI_invaders();
 void save_state_invaders();
 void load_state_invaders();
 
+/* Pong Doubles driver */
+int init_pongdbls(tagRomList gameRom[]);
+void start_pongdbls();
+void shutdown_pongdbls();
+byte doin_pongdbls(byte Port);
+void doout_pongdbls(byte Port, byte Value);
+byte rdmem_pongdbls(word A);
+void wrmem_pongdbls(word A, byte V);
+void patch_pongdbls(reg *R);
+word interrupt_pongdbls();
+void NMI_pongdbls();
+
 /* Pong driver */
 int init_pong(tagRomList gameRom[]);
 void start_pong();
