@@ -12,8 +12,8 @@
 int y[2] = {80, 80};
 const int x[2] = {0, 246};
 int dy[2] = {0, 0};
-const int upkey[2] = {KEY_UP, KEY_Q};
-const int downkey[2] = {KEY_DOWN, KEY_A};
+const int upkey[2] = {KEY_W, KEY_8_PAD};
+const int downkey[2] = {KEY_S, KEY_2_PAD};
 int score[2] = {0, 0};
   int lastWinner = 1;
   int lastClock = 0;
@@ -361,7 +361,19 @@ while (!key[KEY_1])
       textprintf(screen, font, 128, 240, 15, "|");
       textprintf(screen, font, 128, 248, 15, "|");
       textprintf(screen, font, 128, 256, 15, "|");
+
+while(keypressed()) 
+{ 
+switch(readkey() >> 8) 
+{ 
+case KEY_ESC: score[1] = score[2] = 11; 
+balldone = 1; 
+break; 
+default: break; 
+} 
+} 
    }
+
   }
 
         /* Start Z80 Emulatation */

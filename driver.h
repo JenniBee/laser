@@ -121,4 +121,16 @@ void patch_pong(reg *R);
 word interrupt_pong();
 void NMI_pong();
 
+/* hockeytv driver */
+int init_hockeytv(tagRomList gameRom[]);
+void start_hockeytv();
+void shutdown_hockeytv();
+byte doin_hockeytv(byte Port);
+void doout_hockeytv(byte Port, byte Value);
+byte rdmem_hockeytv(word A);
+void wrmem_hockeytv(word A, byte V);
+void patch_hockeytv(reg *R);
+word interrupt_hockeytv();
+void NMI_hockeytv();
+
 #endif

@@ -1,5 +1,8 @@
 #include "laser.h"
 
+tagRomList hockeytvRom[] = {
+};
+
 tagRomList pongdblsRom[] = {
 };
 

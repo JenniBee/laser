@@ -14,6 +14,7 @@ Welcome to the first official Win32 port
 of Laser. We hope you enjoy this release of
 Laser!
 
+Thanks to Atani for the previous Win32 port. :D
 
 Keys
 -----

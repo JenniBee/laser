@@ -5,8 +5,9 @@
 #define invaders
 
 /* Total supported games in Laser */
-#define LASER_TOTAL_SUPPORTED 78
+#define LASER_TOTAL_SUPPORTED 79
 
+extern tagRomList hockeytvRom[];
 extern tagRomList pongdblsRom[];
 extern tagRomList pongRom[];
 extern tagRomList beaminvRom[];
