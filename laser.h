@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <allegro.h>
+#include "C:\mingw\allegro\include\allegro.h"
 #include "cpu.h"
 #include "osiline.h"
 #include "state.h"
