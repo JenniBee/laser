@@ -1,5 +1,5 @@
 /*
- * Space Invaders Driver
+ * Pong Driver
  *
  */
 
@@ -18,16 +18,6 @@ int score[2] = {0, 0};
   int lastWinner = 1;
   int lastClock = 0;
   int title;
-
-void DrawPaddle(int p, int c)
-{
-  rectfill(screen, x[p], y[p] + 3, x[p] + 9, y[p] + Paddle_Height - 4, c);
-}
-
-void DrawBall(int x, int y, int c)
-{
-  rectfill(screen, x, y + 6, x + 3, y + 3, c);
-}
 
 byte rdmem_pong(word A) {
         /* Return a location of RAM */
@@ -194,39 +184,39 @@ void start_pong() {
 
 while (!key[KEY_1])
 {
-      textprintf(screen, font, 132, 0, 15, "|");
-      textprintf(screen, font, 132, 8, 15, "|");
-      textprintf(screen, font, 132, 16, 15, "|");
-      textprintf(screen, font, 132, 24, 15, "|");
-      textprintf(screen, font, 132, 32, 15, "|");
-      textprintf(screen, font, 132, 40, 15, "|");
-      textprintf(screen, font, 132, 48, 15, "|");
-      textprintf(screen, font, 132, 56, 15, "|");
-      textprintf(screen, font, 132, 64, 15, "|");
-      textprintf(screen, font, 132, 72, 15, "|");
-      textprintf(screen, font, 132, 80, 15, "|");
-      textprintf(screen, font, 132, 88, 15, "|");
-      textprintf(screen, font, 132, 96, 15, "|");
-      textprintf(screen, font, 132, 104, 15, "|");
-      textprintf(screen, font, 132, 112, 15, "|");
-      textprintf(screen, font, 132, 120, 15, "|");
-      textprintf(screen, font, 132, 128, 15, "|");
-      textprintf(screen, font, 132, 136, 15, "|");
-      textprintf(screen, font, 132, 144, 15, "|");
-      textprintf(screen, font, 132, 152, 15, "|");
-      textprintf(screen, font, 132, 160, 15, "|");
-      textprintf(screen, font, 132, 168, 15, "|");
-      textprintf(screen, font, 132, 176, 15, "|");
-      textprintf(screen, font, 132, 184, 15, "|");
-      textprintf(screen, font, 132, 192, 15, "|");
-      textprintf(screen, font, 132, 200, 15, "|");
-      textprintf(screen, font, 132, 208, 15, "|");
-      textprintf(screen, font, 132, 216, 15, "|");
-      textprintf(screen, font, 132, 224, 15, "|");
-      textprintf(screen, font, 132, 232, 15, "|");
-      textprintf(screen, font, 132, 240, 15, "|");
-      textprintf(screen, font, 132, 248, 15, "|");
-      textprintf(screen, font, 132, 256, 15, "|");
+      textprintf(screen, font, 104, 0, 15, "0  |  0");
+      textprintf(screen, font, 128, 8, 15, "|");
+      textprintf(screen, font, 128, 16, 15, "|");
+      textprintf(screen, font, 128, 24, 15, "|");
+      textprintf(screen, font, 128, 32, 15, "|");
+      textprintf(screen, font, 128, 40, 15, "|");
+      textprintf(screen, font, 128, 48, 15, "|");
+      textprintf(screen, font, 128, 56, 15, "|");
+      textprintf(screen, font, 128, 64, 15, "|");
+      textprintf(screen, font, 128, 72, 15, "|");
+      textprintf(screen, font, 128, 80, 15, "|");
+      textprintf(screen, font, 128, 88, 15, "|");
+      textprintf(screen, font, 128, 96, 15, "|");
+      textprintf(screen, font, 128, 104, 15, "|");
+      textprintf(screen, font, 128, 112, 15, "|");
+      textprintf(screen, font, 128, 120, 15, "|");
+      textprintf(screen, font, 128, 128, 15, "|");
+      textprintf(screen, font, 128, 136, 15, "|");
+      textprintf(screen, font, 128, 144, 15, "|");
+      textprintf(screen, font, 128, 152, 15, "|");
+      textprintf(screen, font, 128, 160, 15, "|");
+      textprintf(screen, font, 128, 168, 15, "|");
+      textprintf(screen, font, 128, 176, 15, "|");
+      textprintf(screen, font, 128, 184, 15, "|");
+      textprintf(screen, font, 128, 192, 15, "|");
+      textprintf(screen, font, 128, 200, 15, "|");
+      textprintf(screen, font, 128, 208, 15, "|");
+      textprintf(screen, font, 128, 216, 15, "|");
+      textprintf(screen, font, 128, 224, 15, "|");
+      textprintf(screen, font, 128, 232, 15, "|");
+      textprintf(screen, font, 128, 240, 15, "|");
+      textprintf(screen, font, 128, 248, 15, "|");
+      textprintf(screen, font, 128, 256, 15, "|");
 }
 
   while(score[0] < 10 && score[1] < 10)
@@ -325,7 +315,7 @@ while (!key[KEY_1])
           if(balldy >= 0)
             balldy++;
         }
-        else if(ballx < 5)
+        else if(ballx < 1)
         {
           score[1]++;
           rest(1000);
@@ -337,42 +327,41 @@ while (!key[KEY_1])
       if(!balldone)
         DrawBall(ballx, bally, 7);
 
-      textprintf(screen, font, 108, 0, 15, "%d  |  %d",
+      textprintf(screen, font, 104, 0, 15, "%d  |  %d",
                  score[0], score[1]);
-      textprintf(screen, font, 132, 8, 15, "|");
-      textprintf(screen, font, 132, 16, 15, "|");
-      textprintf(screen, font, 132, 24, 15, "|");
-      textprintf(screen, font, 132, 32, 15, "|");
-      textprintf(screen, font, 132, 40, 15, "|");
-      textprintf(screen, font, 132, 48, 15, "|");
-      textprintf(screen, font, 132, 56, 15, "|");
-      textprintf(screen, font, 132, 64, 15, "|");
-      textprintf(screen, font, 132, 72, 15, "|");
-      textprintf(screen, font, 132, 80, 15, "|");
-      textprintf(screen, font, 132, 88, 15, "|");
-      textprintf(screen, font, 132, 96, 15, "|");
-      textprintf(screen, font, 132, 104, 15, "|");
-      textprintf(screen, font, 132, 112, 15, "|");
-      textprintf(screen, font, 132, 120, 15, "|");
-      textprintf(screen, font, 132, 128, 15, "|");
-      textprintf(screen, font, 132, 136, 15, "|");
-      textprintf(screen, font, 132, 144, 15, "|");
-      textprintf(screen, font, 132, 152, 15, "|");
-      textprintf(screen, font, 132, 160, 15, "|");
-      textprintf(screen, font, 132, 168, 15, "|");
-      textprintf(screen, font, 132, 176, 15, "|");
-      textprintf(screen, font, 132, 184, 15, "|");
-      textprintf(screen, font, 132, 192, 15, "|");
-      textprintf(screen, font, 132, 200, 15, "|");
-      textprintf(screen, font, 132, 208, 15, "|");
-      textprintf(screen, font, 132, 216, 15, "|");
-      textprintf(screen, font, 132, 224, 15, "|");
-      textprintf(screen, font, 132, 232, 15, "|");
-      textprintf(screen, font, 132, 240, 15, "|");
-      textprintf(screen, font, 132, 248, 15, "|");
-      textprintf(screen, font, 132, 256, 15, "|");
+      textprintf(screen, font, 128, 8, 15, "|");
+      textprintf(screen, font, 128, 16, 15, "|");
+      textprintf(screen, font, 128, 24, 15, "|");
+      textprintf(screen, font, 128, 32, 15, "|");
+      textprintf(screen, font, 128, 40, 15, "|");
+      textprintf(screen, font, 128, 48, 15, "|");
+      textprintf(screen, font, 128, 56, 15, "|");
+      textprintf(screen, font, 128, 64, 15, "|");
+      textprintf(screen, font, 128, 72, 15, "|");
+      textprintf(screen, font, 128, 80, 15, "|");
+      textprintf(screen, font, 128, 88, 15, "|");
+      textprintf(screen, font, 128, 96, 15, "|");
+      textprintf(screen, font, 128, 104, 15, "|");
+      textprintf(screen, font, 128, 112, 15, "|");
+      textprintf(screen, font, 128, 120, 15, "|");
+      textprintf(screen, font, 128, 128, 15, "|");
+      textprintf(screen, font, 128, 136, 15, "|");
+      textprintf(screen, font, 128, 144, 15, "|");
+      textprintf(screen, font, 128, 152, 15, "|");
+      textprintf(screen, font, 128, 160, 15, "|");
+      textprintf(screen, font, 128, 168, 15, "|");
+      textprintf(screen, font, 128, 176, 15, "|");
+      textprintf(screen, font, 128, 184, 15, "|");
+      textprintf(screen, font, 128, 192, 15, "|");
+      textprintf(screen, font, 128, 200, 15, "|");
+      textprintf(screen, font, 128, 208, 15, "|");
+      textprintf(screen, font, 128, 216, 15, "|");
+      textprintf(screen, font, 128, 224, 15, "|");
+      textprintf(screen, font, 128, 232, 15, "|");
+      textprintf(screen, font, 128, 240, 15, "|");
+      textprintf(screen, font, 128, 248, 15, "|");
+      textprintf(screen, font, 128, 256, 15, "|");
    }
-    
   }
 
         /* Start Z80 Emulatation */
@@ -391,5 +380,12 @@ void shutdown_pong() {
 //        }
 }
 
+void DrawPaddle(int p, int c)
+{
+  rectfill(screen, x[p], y[p] + 3, x[p] + 9, y[p] + Paddle_Height - 4, c);
+}
 
-
+void DrawBall(int x, int y, int c)
+{
+  rectfill(screen, x, y + 6, x + 3, y + 3, c);
+}
