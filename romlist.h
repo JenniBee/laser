@@ -5,8 +5,10 @@
 #define invaders
 
 /* Total supported games in Laser */
-#define LASER_TOTAL_SUPPORTED 77
+#define LASER_TOTAL_SUPPORTED 78
 
+extern tagRomList pongRom[];
+extern tagRomList beaminvRom[];
 extern tagRomList zzzapRom[];
 extern tagRomList seawolfRom[];
 extern tagRomList gunfightRom[];

@@ -97,4 +97,16 @@ void NMI_invaders();
 void save_state_invaders();
 void load_state_invaders();
 
+/* Pong driver */
+int init_pong(tagRomList gameRom[]);
+void start_pong();
+void shutdown_pong();
+byte doin_pong(byte Port);
+void doout_pong(byte Port, byte Value);
+byte rdmem_pong(word A);
+void wrmem_pong(word A, byte V);
+void patch_pong(reg *R);
+word interrupt_pong();
+void NMI_pong();
+
 #endif

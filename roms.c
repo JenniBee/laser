@@ -1,5 +1,17 @@
 #include "laser.h"
 
+tagRomList pongRom[] = {
+};
+
+tagRomList beaminvRom[] = {
+  {"invaders/invaders.h", 0x0000, 0x0800, 6 },
+  {"invaders/invaders.g", 0x0800, 0x0800, 0 },
+  {"invaders/invaders.f", 0x1000, 0x0800, 0 },
+  {"beaminv/2a", 0x1800, 0x0800, 0 },
+  {"beaminv/1a", 0x4000, 0x0800, 0 },
+  {"beaminv/0a", 0x4800, 0x0800, 0 }
+};
+
 tagRomList spacefevRom[] = {
   {"spacefev/f1.bin", 0x0000, 0x0400, 9 },
   {"spacefev/f2.bin", 0x0400, 0x0400, 0 },
@@ -489,8 +501,12 @@ tagRomList galxwarsRom[] = {
 };
 
 tagRomList galxwar2Rom[] = {
-  {"galxwar2/3192.h6",       0x0000, 0x1000, 2 },
-  {"galxwar2/3193.h7",       0x4000, 0x1000, 0 }
+  {"galxwar2/3192.h6",       0x0000, 0x1000, 6 },
+  {"galxwars/univgw4.1",       0x0400, 0x0400, 0 },
+  {"galxwars/univgw5.2",       0x0800, 0x0400, 0 },
+  {"galxwars/univgw6.3",       0x0c00, 0x0400, 0 },
+  {"galxwar2/3193.h7",       0x4000, 0x1000, 0 },
+  {"galxwars/univgw2.5",       0x4400, 0x0400, 0 }
 };
 
 tagRomList galxwartRom[] = {
