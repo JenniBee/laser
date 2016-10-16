@@ -44,8 +44,8 @@ case 0x4C: M_LDWORD(K);R->PC=K;break;
 /* JMP ($ssss) ABDINDIR */
 case 0x6C:
   M_LDWORD(K);
-  R->PC.B.l=driver->rdmem(K.W++);
-  R->PC.B.h=driver->rdmem(K.W);
+  R->PC.B.l=driver.rdmem(K.W++);
+  R->PC.B.h=driver.rdmem(K.W);
   break;
 
 /* BRK */
@@ -54,8 +54,8 @@ case 0x00:
   M_PUSH(R->PC.B.h);M_PUSH(R->PC.B.l);
   M_PUSH(R->P|B_FLAG);
   R->P=(R->P|I_FLAG)&~D_FLAG;
-  R->PC.B.l=driver->rdmem(0xFFFE);
-  R->PC.B.h=driver->rdmem(0xFFFF);
+  R->PC.B.l=driver.rdmem(0xFFFE);
+  R->PC.B.h=driver.rdmem(0xFFFF);
   break;
 
 /* CLI */

@@ -1,0 +1,5 @@
+- Fix non-working romsets
+- Remake discrete logic game simulators in SDL
+- Save stats
+- Sound loops in SDL driver
+- ???

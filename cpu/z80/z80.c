@@ -6,7 +6,7 @@
 /** be used separately to emulate any Z80-based machine.    **/
 /** In this case you will need: Z80.c, Z80.h, PTable.h,     **/
 /** Codes.h, CodesED.h, CodesCB.h, CodesXX.h, CodesXCB.h.   **/
-/** Don't forget to write driver->patch(), driver->rdmem(), and driver->wrmem() **/
+/** Don't forget to write driver.patch(), driver.rdmem(), and driver.wrmem() **/
 /** functions to accomodate emulated machine architecture.  **/
 /**                                                         **/
 /** Copyright (C) Marat Fayzullin 1994,1995,1996            **/
@@ -16,7 +16,7 @@
 /*************************************************************/
 
 #include "laser.h"
-#include "Z80.h"
+#include "z80.h"
 #include "Tables.h"
 
 /*** Registers ***********************************************/
@@ -98,24 +98,24 @@ byte TrapBadOps=0;
 #define M_RES(Bit,Rg) Rg&=~(1<<Bit)
 
 #define M_POP(Rg)      \
-  R.Rg.B.l=driver->rdmem(R.SP.W++);R.Rg.B.h=driver->rdmem(R.SP.W++)
+  R.Rg.B.l=driver.rdmem(R.SP.W++);R.Rg.B.h=driver.rdmem(R.SP.W++)
 #define M_PUSH(Rg)     \
-  driver->wrmem(--R.SP.W,R.Rg.B.h);driver->wrmem(--R.SP.W,R.Rg.B.l)
+  driver.wrmem(--R.SP.W,R.Rg.B.h);driver.wrmem(--R.SP.W,R.Rg.B.l)
 
 #define M_CALL         \
-  J.B.l=driver->rdmem(R.PC.W++);J.B.h=driver->rdmem(R.PC.W++);       \
-  driver->wrmem(--R.SP.W,R.PC.B.h);driver->wrmem(--R.SP.W,R.PC.B.l); \
+  J.B.l=driver.rdmem(R.PC.W++);J.B.h=driver.rdmem(R.PC.W++);       \
+  driver.wrmem(--R.SP.W,R.PC.B.h);driver.wrmem(--R.SP.W,R.PC.B.l); \
   R.PC.W=J.W
 
-#define M_JP  J.B.l=driver->rdmem(R.PC.W++);J.B.h=driver->rdmem(R.PC.W);R.PC.W=J.W
-#define M_JR  R.PC.W+=(offset)driver->rdmem(R.PC.W)+1
-#define M_RET R.PC.B.l=driver->rdmem(R.SP.W++);R.PC.B.h=driver->rdmem(R.SP.W++)
+#define M_JP  J.B.l=driver.rdmem(R.PC.W++);J.B.h=driver.rdmem(R.PC.W);R.PC.W=J.W
+#define M_JR  R.PC.W+=(offset)driver.rdmem(R.PC.W)+1
+#define M_RET R.PC.B.l=driver.rdmem(R.SP.W++);R.PC.B.h=driver.rdmem(R.SP.W++)
 
 #define M_RST(Ad)      \
-  driver->wrmem(--R.SP.W,R.PC.B.h);driver->wrmem(--R.SP.W,R.PC.B.l);R.PC.W=Ad
+  driver.wrmem(--R.SP.W,R.PC.B.h);driver.wrmem(--R.SP.W,R.PC.B.l);R.PC.W=Ad
 
 #define M_LDWORD(Rg)   \
-  R.Rg.B.l=driver->rdmem(R.PC.W++);R.Rg.B.h=driver->rdmem(R.PC.W++)
+  R.Rg.B.l=driver.rdmem(R.PC.W++);R.Rg.B.h=driver.rdmem(R.PC.W++)
 
 #define M_ADD(Rg)      \
   J.W=R.AF.B.h+Rg;     \
@@ -159,7 +159,7 @@ byte TrapBadOps=0;
 #define M_AND(Rg) R.AF.B.h&=Rg;R.AF.B.l=H_FLAG|PZSTable[R.AF.B.h]
 #define M_OR(Rg)  R.AF.B.h|=Rg;R.AF.B.l=PZSTable[R.AF.B.h]
 #define M_XOR(Rg) R.AF.B.h^=Rg;R.AF.B.l=PZSTable[R.AF.B.h]
-#define M_IN(Rg)  Rg=driver->doin(R.BC.B.l);R.AF.B.l=PZSTable[Rg]|(R.AF.B.l&C_FLAG)
+#define M_IN(Rg)  Rg=driver.doin(R.BC.B.l);R.AF.B.l=PZSTable[Rg]|(R.AF.B.l&C_FLAG)
 
 #define M_INC(Rg)       \
   Rg++;                 \
@@ -314,12 +314,12 @@ void CodesCB(void)
 {
   register byte I;
 
-  switch(driver->rdmem(R.PC.W++))
+  switch(driver.rdmem(R.PC.W++))
   {
 #include "CodesCB.h"
     default:
       if(TrapBadOps)
-        printf("Unrecognized instruction: CB %X at PC=%hX\n", driver->rdmem(R.PC.W-1),R.PC.W-2);
+        printf("Unrecognized instruction: CB %X at PC=%hX\n", driver.rdmem(R.PC.W-1),R.PC.W-2);
   }
 }
 
@@ -329,14 +329,14 @@ void CodesDDCB(void)
   register byte I;
 
 #define XX IX    
-  J.W=R.XX.W+(offset)driver->rdmem(R.PC.W++);
+  J.W=R.XX.W+(offset)driver.rdmem(R.PC.W++);
 
-  switch(driver->rdmem(R.PC.W++))
+  switch(driver.rdmem(R.PC.W++))
   {
 #include "CodesXCB.h"
     default:
       if(TrapBadOps)
-        printf("Unrecognized instruction: DD CB %X %X at PC=%hX\n",driver->rdmem(R.PC.W-2),driver->rdmem(R.PC.W-1),R.PC.W-4);
+        printf("Unrecognized instruction: DD CB %X %X at PC=%hX\n",driver.rdmem(R.PC.W-2),driver.rdmem(R.PC.W-1),R.PC.W-4);
   }
 #undef XX
 }
@@ -347,9 +347,9 @@ void CodesFDCB(void)
   register byte I;
 
 #define XX IY
-  J.W=R.XX.W+(offset)driver->rdmem(R.PC.W++);
+  J.W=R.XX.W+(offset)driver.rdmem(R.PC.W++);
 
-  switch(driver->rdmem(R.PC.W++))
+  switch(driver.rdmem(R.PC.W++))
   {
 #include "CodesXCB.h"
     default:
@@ -357,7 +357,7 @@ void CodesFDCB(void)
         printf
         (
           "Unrecognized instruction: FD CB %X %X at PC=%hX\n",
-          driver->rdmem(R.PC.W-2),driver->rdmem(R.PC.W-1),R.PC.W-4
+          driver.rdmem(R.PC.W-2),driver.rdmem(R.PC.W-1),R.PC.W-4
         );
   }
 #undef XX
@@ -368,7 +368,7 @@ void CodesED(void)
   register byte I;
   register pair J;
 
-  switch(driver->rdmem(R.PC.W++))
+  switch(driver.rdmem(R.PC.W++))
   {
 #include "CodesED.h"
     case PFX_ED:
@@ -378,7 +378,7 @@ void CodesED(void)
       R.PC.W--;break;
     default:
       if(TrapBadOps)
-        printf("Unrecognized instruction: ED %X at PC=%hX\n",driver->rdmem(R.PC.W-1),R.PC.W-2);
+        printf("Unrecognized instruction: ED %X at PC=%hX\n",driver.rdmem(R.PC.W-1),R.PC.W-2);
   }
 }
 
@@ -388,7 +388,7 @@ void CodesDD(void)
   register pair J;
 
 #define XX IX
-  switch(driver->rdmem(R.PC.W++))
+  switch(driver.rdmem(R.PC.W++))
   {
 #include "CodesXX.h"
     case PFX_FD:
@@ -409,7 +409,7 @@ void CodesDD(void)
       break;
     default:
       if(TrapBadOps)
-        printf("Unrecognized instruction: DD %X at PC=%hX\n",driver->rdmem(R.PC.W-1),R.PC.W-2);
+        printf("Unrecognized instruction: DD %X at PC=%hX\n",driver.rdmem(R.PC.W-1),R.PC.W-2);
   }
 #undef XX
 }
@@ -420,7 +420,7 @@ void CodesFD(void)
   register pair J;
 
 #define XX IY
-  switch(driver->rdmem(R.PC.W++))
+  switch(driver.rdmem(R.PC.W++))
   {
 #include "CodesXX.h"
     case PFX_FD:
@@ -440,7 +440,7 @@ void CodesFD(void)
 #endif
       break;
     default:
-        printf("Unrecognized instruction: FD %X at PC=%hX\n",driver->rdmem(R.PC.W-1),R.PC.W-2);
+        printf("Unrecognized instruction: FD %X at PC=%hX\n",driver.rdmem(R.PC.W-1),R.PC.W-2);
   }
 #undef XX
 }
@@ -481,10 +481,10 @@ word Z80(reg Regs)
   {
 #ifdef DEBUG
     if(R.PC.W==Trap) Trace=1;  /*** Turn tracing on if trapped ***/
-    if(Trace) Debug(&R);       /*** Call single-step debugger  ***/
+    if(Trace) ZDebug(&R);       /*** Call single-step debugger  ***/
 #endif
 
-    switch(driver->rdmem(R.PC.W++))
+    switch(driver.rdmem(R.PC.W++))
     {
 #include "Codes.h"
 	  case PFX_CB: CodesCB();break;
@@ -501,18 +501,16 @@ word Z80(reg Regs)
         break;
       default:
         if(TrapBadOps)
-          printf("Unrecognized instruction: %X at PC=%hX\n",driver->rdmem(R.PC.W-1),R.PC.W-1);
+          printf("Unrecognized instruction: %X at PC=%hX\n",driver.rdmem(R.PC.W-1),R.PC.W-1);
 	}
  
 #ifndef INTERRUPTS
     if(!CPURunning) break;
 #else
 
-    if(!CPURunning) break;
-
     if(!ICount--)
     {
-      driver->NMI();
+      driver.NMI();
       if(!CPURunning) break;
       ICount=IPeriod;
       if(IntSync) IFlag=1;
@@ -520,7 +518,7 @@ word Z80(reg Regs)
 
     if(IFlag)
     {
-      IFlag=0;J.W=driver->interrupt();
+      IFlag=0;J.W=driver.interrupt();
       if(((J.W!=0xFFFF)&&(R.IFF&0x01))||(J.W==0x0066)) // 0x66
       {
         /* Experimental V Shouldn't disable all interrupts? */
@@ -533,8 +531,8 @@ word Z80(reg Regs)
           if(R.IFF&0x04)
           { 
             J.W&=0xFE;J.B.h=R.I;
-            R.PC.B.l=driver->rdmem(J.W++);
-            R.PC.B.h=driver->rdmem(J.W);
+            R.PC.B.l=driver.rdmem(J.W++);
+            R.PC.B.h=driver.rdmem(J.W);
           }
           else
             if(R.IFF&0x02) R.PC.W=0x0038; // 0x38

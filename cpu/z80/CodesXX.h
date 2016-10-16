@@ -1,8 +1,8 @@
 /** Z80: portable Z80 emulator *******************************/
 /**                                                         **/
-/**                          Codes.h                        **/
+/**                         CodesXX.h                       **/
 /**                                                         **/
-/** This file contains implementation for the main table of **/
+/** This file contains implementation for FD/DD tables of   **/
 /** Z80 commands. It is included from Z80.c.                **/
 /**                                                         **/
 /** Copyright (C) Marat Fayzullin 1994,1995,1996            **/
@@ -47,139 +47,151 @@ case ADD_B:    M_ADD(R.BC.B.h);break;
 case ADD_C:    M_ADD(R.BC.B.l);break;
 case ADD_D:    M_ADD(R.DE.B.h);break;
 case ADD_E:    M_ADD(R.DE.B.l);break;
-case ADD_H:    M_ADD(R.HL.B.h);break;
-case ADD_L:    M_ADD(R.HL.B.l);break;
+case ADD_H:    M_ADD(R.XX.B.h);break;
+case ADD_L:    M_ADD(R.XX.B.l);break;
 case ADD_A:    M_ADD(R.AF.B.h);break;
-case ADD_xHL:  I=driver.rdmem(R.HL.W);M_ADD(I);break;
+case ADD_xHL:  I=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W++));
+               M_ADD(I);break;
 case ADD_BYTE: I=driver.rdmem(R.PC.W++);M_ADD(I);break;
 
 case SUB_B:    M_SUB(R.BC.B.h);break;
 case SUB_C:    M_SUB(R.BC.B.l);break;
 case SUB_D:    M_SUB(R.DE.B.h);break;
 case SUB_E:    M_SUB(R.DE.B.l);break;
-case SUB_H:    M_SUB(R.HL.B.h);break;
-case SUB_L:    M_SUB(R.HL.B.l);break;
+case SUB_H:    M_SUB(R.XX.B.h);break;
+case SUB_L:    M_SUB(R.XX.B.l);break;
 case SUB_A:    R.AF.B.h=0;R.AF.B.l=N_FLAG|Z_FLAG;break;
-case SUB_xHL:  I=driver.rdmem(R.HL.W);M_SUB(I);break;
+case SUB_xHL:  I=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W++));
+               M_SUB(I);break;
 case SUB_BYTE: I=driver.rdmem(R.PC.W++);M_SUB(I);break;
 
 case AND_B:    M_AND(R.BC.B.h);break;
 case AND_C:    M_AND(R.BC.B.l);break;
 case AND_D:    M_AND(R.DE.B.h);break;
 case AND_E:    M_AND(R.DE.B.l);break;
-case AND_H:    M_AND(R.HL.B.h);break;
-case AND_L:    M_AND(R.HL.B.l);break;
+case AND_H:    M_AND(R.XX.B.h);break;
+case AND_L:    M_AND(R.XX.B.l);break;
 case AND_A:    M_AND(R.AF.B.h);break;
-case AND_xHL:  I=driver.rdmem(R.HL.W);M_AND(I);break;
+case AND_xHL:  I=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W++));
+               M_AND(I);break;
 case AND_BYTE: I=driver.rdmem(R.PC.W++);M_AND(I);break;
 
 case OR_B:     M_OR(R.BC.B.h);break;
 case OR_C:     M_OR(R.BC.B.l);break;
 case OR_D:     M_OR(R.DE.B.h);break;
 case OR_E:     M_OR(R.DE.B.l);break;
-case OR_H:     M_OR(R.HL.B.h);break;
-case OR_L:     M_OR(R.HL.B.l);break;
+case OR_H:     M_OR(R.XX.B.h);break;
+case OR_L:     M_OR(R.XX.B.l);break;
 case OR_A:     M_OR(R.AF.B.h);break;
-case OR_xHL:   I=driver.rdmem(R.HL.W);M_OR(I);break;
+case OR_xHL:   I=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W++));
+               M_OR(I);break;
 case OR_BYTE:  I=driver.rdmem(R.PC.W++);M_OR(I);break;
 
 case ADC_B:    M_ADC(R.BC.B.h);break;
 case ADC_C:    M_ADC(R.BC.B.l);break;
 case ADC_D:    M_ADC(R.DE.B.h);break;
 case ADC_E:    M_ADC(R.DE.B.l);break;
-case ADC_H:    M_ADC(R.HL.B.h);break;
-case ADC_L:    M_ADC(R.HL.B.l);break;
+case ADC_H:    M_ADC(R.XX.B.h);break;
+case ADC_L:    M_ADC(R.XX.B.l);break;
 case ADC_A:    M_ADC(R.AF.B.h);break;
-case ADC_xHL:  I=driver.rdmem(R.HL.W);M_ADC(I);break;
+case ADC_xHL:  I=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W++));
+               M_ADC(I);break;
 case ADC_BYTE: I=driver.rdmem(R.PC.W++);M_ADC(I);break;
 
 case SBC_B:    M_SBC(R.BC.B.h);break;
 case SBC_C:    M_SBC(R.BC.B.l);break;
 case SBC_D:    M_SBC(R.DE.B.h);break;
 case SBC_E:    M_SBC(R.DE.B.l);break;
-case SBC_H:    M_SBC(R.HL.B.h);break;
-case SBC_L:    M_SBC(R.HL.B.l);break;
+case SBC_H:    M_SBC(R.XX.B.h);break;
+case SBC_L:    M_SBC(R.XX.B.l);break;
 case SBC_A:    M_SBC(R.AF.B.h);break;
-case SBC_xHL:  I=driver.rdmem(R.HL.W);M_SBC(I);break;
+case SBC_xHL:  I=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W++));
+               M_SBC(I);break;
 case SBC_BYTE: I=driver.rdmem(R.PC.W++);M_SBC(I);break;
 
 case XOR_B:    M_XOR(R.BC.B.h);break;
 case XOR_C:    M_XOR(R.BC.B.l);break;
 case XOR_D:    M_XOR(R.DE.B.h);break;
 case XOR_E:    M_XOR(R.DE.B.l);break;
-case XOR_H:    M_XOR(R.HL.B.h);break;
-case XOR_L:    M_XOR(R.HL.B.l);break;
+case XOR_H:    M_XOR(R.XX.B.h);break;
+case XOR_L:    M_XOR(R.XX.B.l);break;
 case XOR_A:    R.AF.B.h=0;R.AF.B.l=P_FLAG|Z_FLAG;break;
-case XOR_xHL:  I=driver.rdmem(R.HL.W);M_XOR(I);break;
+case XOR_xHL:  I=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W++));
+               M_XOR(I);break;
 case XOR_BYTE: I=driver.rdmem(R.PC.W++);M_XOR(I);break;
 
 case CP_B:     M_CP(R.BC.B.h);break;
 case CP_C:     M_CP(R.BC.B.l);break;
 case CP_D:     M_CP(R.DE.B.h);break;
 case CP_E:     M_CP(R.DE.B.l);break;
-case CP_H:     M_CP(R.HL.B.h);break;
-case CP_L:     M_CP(R.HL.B.l);break;
+case CP_H:     M_CP(R.XX.B.h);break;
+case CP_L:     M_CP(R.XX.B.l);break;
 case CP_A:     R.AF.B.l=N_FLAG|Z_FLAG;break;
-case CP_xHL:   I=driver.rdmem(R.HL.W);M_CP(I);break;
+case CP_xHL:   I=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W++));
+               M_CP(I);break;
 case CP_BYTE:  I=driver.rdmem(R.PC.W++);M_CP(I);break;
                
 case LD_BC_WORD: M_LDWORD(BC);break;
 case LD_DE_WORD: M_LDWORD(DE);break;
-case LD_HL_WORD: M_LDWORD(HL);break;
+case LD_HL_WORD: M_LDWORD(XX);break;
 case LD_SP_WORD: M_LDWORD(SP);break;
 
-case LD_PC_HL: R.PC.W=R.HL.W;break;
-case LD_SP_HL: R.SP.W=R.HL.W;break;
+case LD_PC_HL: R.PC.W=R.XX.W;break;
+case LD_SP_HL: R.SP.W=R.XX.W;break;
 case LD_A_xBC: R.AF.B.h=driver.rdmem(R.BC.W);break;
 case LD_A_xDE: R.AF.B.h=driver.rdmem(R.DE.W);break;
 
-case ADD_HL_BC:  M_ADDW(HL,BC);break;
-case ADD_HL_DE:  M_ADDW(HL,DE);break;
-case ADD_HL_HL:  M_ADDW(HL,HL);break;
-case ADD_HL_SP:  M_ADDW(HL,SP);break;
+case ADD_HL_BC:  M_ADDW(XX,BC);break;
+case ADD_HL_DE:  M_ADDW(XX,DE);break;
+case ADD_HL_HL:  M_ADDW(XX,XX);break;
+case ADD_HL_SP:  M_ADDW(XX,SP);break;
 
 case DEC_BC:   R.BC.W--;break;
 case DEC_DE:   R.DE.W--;break;
-case DEC_HL:   R.HL.W--;break;
+case DEC_HL:   R.XX.W--;break;
 case DEC_SP:   R.SP.W--;break;
 
 case INC_BC:   R.BC.W++;break;
 case INC_DE:   R.DE.W++;break;
-case INC_HL:   R.HL.W++;break;
+case INC_HL:   R.XX.W++;break;
 case INC_SP:   R.SP.W++;break;
 
 case DEC_B:    M_DEC(R.BC.B.h);break;
 case DEC_C:    M_DEC(R.BC.B.l);break;
 case DEC_D:    M_DEC(R.DE.B.h);break;
 case DEC_E:    M_DEC(R.DE.B.l);break;
-case DEC_H:    M_DEC(R.HL.B.h);break;
-case DEC_L:    M_DEC(R.HL.B.l);break;
+case DEC_H:    M_DEC(R.XX.B.h);break;
+case DEC_L:    M_DEC(R.XX.B.l);break;
 case DEC_A:    M_DEC(R.AF.B.h);break;
-case DEC_xHL:  I=driver.rdmem(R.HL.W);M_DEC(I);driver.wrmem(R.HL.W,I);break;
+case DEC_xHL:  I=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W));M_DEC(I);
+               driver.wrmem(R.XX.W+(offset)driver.rdmem(R.PC.W++),I);
+               break;
 
 case INC_B:    M_INC(R.BC.B.h);break;
 case INC_C:    M_INC(R.BC.B.l);break;
 case INC_D:    M_INC(R.DE.B.h);break;
 case INC_E:    M_INC(R.DE.B.l);break;
-case INC_H:    M_INC(R.HL.B.h);break;
-case INC_L:    M_INC(R.HL.B.l);break;
+case INC_H:    M_INC(R.XX.B.h);break;
+case INC_L:    M_INC(R.XX.B.l);break;
 case INC_A:    M_INC(R.AF.B.h);break;
-case INC_xHL:  I=driver.rdmem(R.HL.W);M_INC(I);driver.wrmem(R.HL.W,I);break;
+case INC_xHL:  I=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W));M_INC(I);
+               driver.wrmem(R.XX.W+(offset)driver.rdmem(R.PC.W++),I);
+               break;
 
 case RLCA:
-  I=R.AF.B.h&0x80? C_FLAG:0;
+  I=(R.AF.B.h&0x80? C_FLAG:0);
   R.AF.B.h=(R.AF.B.h<<1)|I;
   R.AF.B.l=(R.AF.B.l&~(C_FLAG|N_FLAG|H_FLAG))|I;
   break;
 case RLA:
-  I=R.AF.B.h&0x80? C_FLAG:0;
+  I=(R.AF.B.h&0x80? C_FLAG:0);
   R.AF.B.h=(R.AF.B.h<<1)|(R.AF.B.l&C_FLAG);
   R.AF.B.l=(R.AF.B.l&~(C_FLAG|N_FLAG|H_FLAG))|I;
   break;
 case RRCA:
   I=R.AF.B.h&0x01;
   R.AF.B.h=(R.AF.B.h>>1)|(I? 0x80:0);
-  R.AF.B.l=(R.AF.B.l&~(C_FLAG|N_FLAG|H_FLAG))|I; 
+  R.AF.B.l=(R.AF.B.l&~(C_FLAG|N_FLAG|H_FLAG))|I;
   break;
 case RRA:
   I=R.AF.B.h&0x01;
@@ -198,12 +210,12 @@ case RST38:    M_RST(0x0038);break;
 
 case PUSH_BC:  M_PUSH(BC);break;
 case PUSH_DE:  M_PUSH(DE);break;
-case PUSH_HL:  M_PUSH(HL);break;
+case PUSH_HL:  M_PUSH(XX);break;
 case PUSH_AF:  M_PUSH(AF);break;
 
 case POP_BC:   M_POP(BC);break;
 case POP_DE:   M_POP(DE);break;
-case POP_HL:   M_POP(HL);break;
+case POP_HL:   M_POP(XX);break;
 case POP_AF:   M_POP(AF);break;
 
 case DJNZ: if(--R.BC.B.h) { M_JR; } else R.PC.W++;break;
@@ -237,102 +249,110 @@ case LD_B_B:   R.BC.B.h=R.BC.B.h;break;
 case LD_C_B:   R.BC.B.l=R.BC.B.h;break;
 case LD_D_B:   R.DE.B.h=R.BC.B.h;break;
 case LD_E_B:   R.DE.B.l=R.BC.B.h;break;
-case LD_H_B:   R.HL.B.h=R.BC.B.h;break;
-case LD_L_B:   R.HL.B.l=R.BC.B.h;break;
+case LD_H_B:   R.XX.B.h=R.BC.B.h;break;
+case LD_L_B:   R.XX.B.l=R.BC.B.h;break;
 case LD_A_B:   R.AF.B.h=R.BC.B.h;break;
-case LD_xHL_B: driver.wrmem(R.HL.W,R.BC.B.h);break;
+case LD_xHL_B: J.W=R.XX.W+(offset)driver.rdmem(R.PC.W++);
+               driver.wrmem(J.W,R.BC.B.h);break;
 
 case LD_B_C:   R.BC.B.h=R.BC.B.l;break;
 case LD_C_C:   R.BC.B.l=R.BC.B.l;break;
 case LD_D_C:   R.DE.B.h=R.BC.B.l;break;
 case LD_E_C:   R.DE.B.l=R.BC.B.l;break;
-case LD_H_C:   R.HL.B.h=R.BC.B.l;break;
-case LD_L_C:   R.HL.B.l=R.BC.B.l;break;
+case LD_H_C:   R.XX.B.h=R.BC.B.l;break;
+case LD_L_C:   R.XX.B.l=R.BC.B.l;break;
 case LD_A_C:   R.AF.B.h=R.BC.B.l;break;
-case LD_xHL_C: driver.wrmem(R.HL.W,R.BC.B.l);break;
+case LD_xHL_C: J.W=R.XX.W+(offset)driver.rdmem(R.PC.W++);
+               driver.wrmem(J.W,R.BC.B.l);break;
 
 case LD_B_D:   R.BC.B.h=R.DE.B.h;break;
 case LD_C_D:   R.BC.B.l=R.DE.B.h;break;
 case LD_D_D:   R.DE.B.h=R.DE.B.h;break;
 case LD_E_D:   R.DE.B.l=R.DE.B.h;break;
-case LD_H_D:   R.HL.B.h=R.DE.B.h;break;
-case LD_L_D:   R.HL.B.l=R.DE.B.h;break;
+case LD_H_D:   R.XX.B.h=R.DE.B.h;break;
+case LD_L_D:   R.XX.B.l=R.DE.B.h;break;
 case LD_A_D:   R.AF.B.h=R.DE.B.h;break;
-case LD_xHL_D: driver.wrmem(R.HL.W,R.DE.B.h);break;
+case LD_xHL_D: J.W=R.XX.W+(offset)driver.rdmem(R.PC.W++);
+               driver.wrmem(J.W,R.DE.B.h);break;
 
 case LD_B_E:   R.BC.B.h=R.DE.B.l;break;
 case LD_C_E:   R.BC.B.l=R.DE.B.l;break;
 case LD_D_E:   R.DE.B.h=R.DE.B.l;break;
 case LD_E_E:   R.DE.B.l=R.DE.B.l;break;
-case LD_H_E:   R.HL.B.h=R.DE.B.l;break;
-case LD_L_E:   R.HL.B.l=R.DE.B.l;break;
+case LD_H_E:   R.XX.B.h=R.DE.B.l;break;
+case LD_L_E:   R.XX.B.l=R.DE.B.l;break;
 case LD_A_E:   R.AF.B.h=R.DE.B.l;break;
-case LD_xHL_E: driver.wrmem(R.HL.W,R.DE.B.l);break;
+case LD_xHL_E: J.W=R.XX.W+(offset)driver.rdmem(R.PC.W++);
+               driver.wrmem(J.W,R.DE.B.l);break;
 
-case LD_B_H:   R.BC.B.h=R.HL.B.h;break;
-case LD_C_H:   R.BC.B.l=R.HL.B.h;break;
-case LD_D_H:   R.DE.B.h=R.HL.B.h;break;
-case LD_E_H:   R.DE.B.l=R.HL.B.h;break;
-case LD_H_H:   R.HL.B.h=R.HL.B.h;break;
-case LD_L_H:   R.HL.B.l=R.HL.B.h;break;
-case LD_A_H:   R.AF.B.h=R.HL.B.h;break;
-case LD_xHL_H: driver.wrmem(R.HL.W,R.HL.B.h);break;
+case LD_B_H:   R.BC.B.h=R.XX.B.h;break;
+case LD_C_H:   R.BC.B.l=R.XX.B.h;break;
+case LD_D_H:   R.DE.B.h=R.XX.B.h;break;
+case LD_E_H:   R.DE.B.l=R.XX.B.h;break;
+case LD_H_H:   R.XX.B.h=R.XX.B.h;break;
+case LD_L_H:   R.XX.B.l=R.XX.B.h;break;
+case LD_A_H:   R.AF.B.h=R.XX.B.h;break;
+case LD_xHL_H: J.W=R.XX.W+(offset)driver.rdmem(R.PC.W++);
+               driver.wrmem(J.W,R.HL.B.h);break;
 
-case LD_B_L:   R.BC.B.h=R.HL.B.l;break;
-case LD_C_L:   R.BC.B.l=R.HL.B.l;break;
-case LD_D_L:   R.DE.B.h=R.HL.B.l;break;
-case LD_E_L:   R.DE.B.l=R.HL.B.l;break;
-case LD_H_L:   R.HL.B.h=R.HL.B.l;break;
-case LD_L_L:   R.HL.B.l=R.HL.B.l;break;
-case LD_A_L:   R.AF.B.h=R.HL.B.l;break;
-case LD_xHL_L: driver.wrmem(R.HL.W,R.HL.B.l);break;
+case LD_B_L:   R.BC.B.h=R.XX.B.l;break;
+case LD_C_L:   R.BC.B.l=R.XX.B.l;break;
+case LD_D_L:   R.DE.B.h=R.XX.B.l;break;
+case LD_E_L:   R.DE.B.l=R.XX.B.l;break;
+case LD_H_L:   R.XX.B.h=R.XX.B.l;break;
+case LD_L_L:   R.XX.B.l=R.XX.B.l;break;
+case LD_A_L:   R.AF.B.h=R.XX.B.l;break;
+case LD_xHL_L: J.W=R.XX.W+(offset)driver.rdmem(R.PC.W++);
+               driver.wrmem(J.W,R.HL.B.l);break;
 
 case LD_B_A:   R.BC.B.h=R.AF.B.h;break;
 case LD_C_A:   R.BC.B.l=R.AF.B.h;break;
 case LD_D_A:   R.DE.B.h=R.AF.B.h;break;
 case LD_E_A:   R.DE.B.l=R.AF.B.h;break;
-case LD_H_A:   R.HL.B.h=R.AF.B.h;break;
-case LD_L_A:   R.HL.B.l=R.AF.B.h;break;
+case LD_H_A:   R.XX.B.h=R.AF.B.h;break;
+case LD_L_A:   R.XX.B.l=R.AF.B.h;break;
 case LD_A_A:   R.AF.B.h=R.AF.B.h;break;
-case LD_xHL_A: driver.wrmem(R.HL.W,R.AF.B.h);break;
+case LD_xHL_A: J.W=R.XX.W+(offset)driver.rdmem(R.PC.W++);
+               driver.wrmem(J.W,R.AF.B.h);break;
 
 case LD_xBC_A: driver.wrmem(R.BC.W,R.AF.B.h);break;
 case LD_xDE_A: driver.wrmem(R.DE.W,R.AF.B.h);break;
 
-case LD_B_xHL:    R.BC.B.h=driver.rdmem(R.HL.W);break;
-case LD_C_xHL:    R.BC.B.l=driver.rdmem(R.HL.W);break;
-case LD_D_xHL:    R.DE.B.h=driver.rdmem(R.HL.W);break;
-case LD_E_xHL:    R.DE.B.l=driver.rdmem(R.HL.W);break;
-case LD_H_xHL:    R.HL.B.h=driver.rdmem(R.HL.W);break;
-case LD_L_xHL:    R.HL.B.l=driver.rdmem(R.HL.W);break;
-case LD_A_xHL:    R.AF.B.h=driver.rdmem(R.HL.W);break;
+case LD_B_xHL:    R.BC.B.h=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W++));break;
+case LD_C_xHL:    R.BC.B.l=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W++));break;
+case LD_D_xHL:    R.DE.B.h=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W++));break;
+case LD_E_xHL:    R.DE.B.l=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W++));break;
+case LD_H_xHL:    R.HL.B.h=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W++));break;
+case LD_L_xHL:    R.HL.B.l=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W++));break;
+case LD_A_xHL:    R.AF.B.h=driver.rdmem(R.XX.W+(offset)driver.rdmem(R.PC.W++));break;
 
 case LD_B_BYTE:   R.BC.B.h=driver.rdmem(R.PC.W++);break;
 case LD_C_BYTE:   R.BC.B.l=driver.rdmem(R.PC.W++);break;
 case LD_D_BYTE:   R.DE.B.h=driver.rdmem(R.PC.W++);break;
 case LD_E_BYTE:   R.DE.B.l=driver.rdmem(R.PC.W++);break;
-case LD_H_BYTE:   R.HL.B.h=driver.rdmem(R.PC.W++);break;
-case LD_L_BYTE:   R.HL.B.l=driver.rdmem(R.PC.W++);break;
+case LD_H_BYTE:   R.XX.B.h=driver.rdmem(R.PC.W++);break;
+case LD_L_BYTE:   R.XX.B.l=driver.rdmem(R.PC.W++);break;
 case LD_A_BYTE:   R.AF.B.h=driver.rdmem(R.PC.W++);break;
-case LD_xHL_BYTE: driver.wrmem(R.HL.W,driver.rdmem(R.PC.W++));break;
+case LD_xHL_BYTE: J.W=R.XX.W+(offset)driver.rdmem(R.PC.W++);
+                  driver.wrmem(J.W,driver.rdmem(R.PC.W++));break;
 
 case LD_xWORD_HL:
   J.B.l=driver.rdmem(R.PC.W++);
   J.B.h=driver.rdmem(R.PC.W++);
-  driver.wrmem(J.W++,R.HL.B.l);
-  driver.wrmem(J.W,R.HL.B.h);
+  driver.wrmem(J.W++,R.XX.B.l);
+  driver.wrmem(J.W,R.XX.B.h);
   break;
 
 case LD_HL_xWORD:
   J.B.l=driver.rdmem(R.PC.W++);
   J.B.h=driver.rdmem(R.PC.W++);
-  R.HL.B.l=driver.rdmem(J.W++);
-  R.HL.B.h=driver.rdmem(J.W);
+  R.XX.B.l=driver.rdmem(J.W++);
+  R.XX.B.h=driver.rdmem(J.W);
   break;
 
 case LD_A_xWORD:
   J.B.l=driver.rdmem(R.PC.W++);
-  J.B.h=driver.rdmem(R.PC.W++); 
+  J.B.h=driver.rdmem(R.PC.W++);
   R.AF.B.h=driver.rdmem(J.W);
   break;
 
@@ -343,9 +363,9 @@ case LD_xWORD_A:
   break;
 
 case EX_HL_xSP:
-  J.B.l=driver.rdmem(R.SP.W);driver.wrmem(R.SP.W++,R.HL.B.l);
-  J.B.h=driver.rdmem(R.SP.W);driver.wrmem(R.SP.W--,R.HL.B.h);
-  R.HL.W=J.W;
+  J.B.l=driver.rdmem(R.SP.W);driver.wrmem(R.SP.W++,R.XX.B.l);
+  J.B.h=driver.rdmem(R.SP.W);driver.wrmem(R.SP.W--,R.XX.B.h);
+  R.XX.W=J.W;
   break;
 
 case DAA:

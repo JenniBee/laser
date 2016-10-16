@@ -60,7 +60,8 @@ typedef struct
 #ifdef INTERRUPTS
 extern int  IPeriod;  /* Number of commands between internal interrupts */
 extern byte IntSync;  /* Generate internal interrupts if IntSync==1     */
-extern volatile byte IFlag;    /* If IFlag==1, generate interrupt and set to 0   */
+//extern volatile byte IFlag;    /* If IFlag==1, generate interrupt and set to 0   */
+extern byte IFlag;
 #endif
 
 /*** Trace and Trap ***************************************/         
@@ -123,7 +124,7 @@ void Patch(reg *R);
 /*** executed by the CPU and given a pointer to the     ***/
 /*** register file.                                     ***/
 /**********************************************************/
-void Debug(reg *R);
+void ZDebug(reg *R);
 #endif
 
 #ifdef INTERRUPTS

@@ -1,26 +1,27 @@
 #ifndef _LASER_H_
 #define _LASER_H_
 
-
 #include <stdio.h>
 #include <stdlib.h>
-#include "C:\mingw\allegro\include\allegro.h"
+#include <string.h>
+#include <SDL.h>
 #include "cpu.h"
 #include "osiline.h"
 #include "state.h"
 #include "roms.h"
 #include "driver.h"
-#include "msdos.h"
-#include "keyboard.h"
+#include "laser_sdl.h"
 #include "samples.h"
 #include "romlist.h"
 
-#define LASER_MAJOR 0
-#define LASER_MINOR 20
-#define LASER_VERSION "0.20"
+#define LASER_MAJOR 1
+#define LASER_MINOR 01
+#define LASER_VERSION "1.0r1"
 
 byte *RAM;
 
-extern laserDriver *driver;
+extern laserDriver driver;
+
+extern int ldebug;
 
 #endif

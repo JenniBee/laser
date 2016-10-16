@@ -1,28 +1,28 @@
-# Laser v0.20
+# Laser
 #
 #
 
-EXE = laser32
-SYS = msdos/msdos.o msdos/samples.o
+EXE = laser
+SYS = sdl/laser_sdl.o sdl/SDL_framerate.o sdl/samples.o
 CPUS = cpu/z80/z80.o cpu/m6502/m6502.o
-DRIVERS = drivers/8080bw.o drivers/pong.o drivers/pongdbls.o drivers/hockeytv.o
-OBJS = $(CPUS) $(DRIVERS) $(SYS) driver.o roms.o state.o
+DRIVERS = drivers/8080bw.o
+OBJS = $(SYS) $(CPUS) $(DRIVERS) driver.o roms.o state.o
 
 #CFLAGS = -Wall -O3
 CFLAGS = -Wall
 DEFS = -DLSB_FIRST
-LIBS = -L./lib -lalleg
-INCS = -I. -I./cpu -I./drivers -I./msdos -I../../mingw/allegro/include
+LIBS = -lmingw32 -lwinmm -L/mingw/lib -lSDLmain -lSDL -mwindows  -lm -luser32 -lgdi32 -lwinmm
+INCS = -I. -I./cpu -I./drivers -I./sdl -I/mingw/include/SDL -D_GNU_SOURCE=1 -Dmain=SDL_main 
 CC = gcc
-all: $(EXE).exe
+all: $(EXE)
 
 
 
-$(EXE).exe: $(OBJS)
-	$(CC) $(CFLAGS) -o $(EXE).exe $(OBJS) $(LIBS)
+$(EXE): $(OBJS)
+	$(CC) $(CFLAGS) -o $(EXE) $(OBJS) $(LIBS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(DEFS) $(INCS) -c $< -o $@
 
 clean:
-	-rm -f $(OBJS) $(EXE).exe
+	-rm -f $(OBJS) $(EXE)

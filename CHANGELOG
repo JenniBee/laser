@@ -1,0 +1,229 @@
+1.02 (31st August 2013)
+----------------
+I went through and tried to get some of the games that 
+I commented out in the last release working. The games 
+that were disabled but are now supported are:
+
+Ozma Wars (Set 2)
+Solar Fight
+Space Invaders (SV Version Set 1)
+Space Invaders (SV Version Set 2)
+Space Invaders (TV version)
+Space Invaders Part Four
+
+In addition, there are some newly added games as well:
+
+Cosmic Monsters 2
+Indian Battle
+Yosaku To Donbei (Set 2)
+Ultra Invaders
+
+35 romsets are supported (see README for a full list).
+
+1.01 (26th August 2013)
+-----------------------
+I went through and tested all of the games.  I've commented
+out the games that do not work anymore (many never did) and 
+re-added the game list to the readme.
+
+Some games have been updated so they use rom names from the 
+latest MAME naming conventions:
+
+Alien Invasion
+Balloon Bomber
+Galaxy Wars (Taito)
+Invader's Revenge (Dutchford)
+Jatre Specter (Set 2)
+Space Invaders (CV Version)
+Space Invaders Part II
+Super Invaders (Emag)
+Space War Part Three
+
+1.0 (25th August 2013)
+----------------------
+It's been 9 years since the last release of Laser.
+Much has changed since then, most notably the fact
+that computers are much faster. Because of this, a
+frame limiter (from SDL_gfx) has been added. Also,
+sound is now set as always on. The -sound flag has
+been removed.
+
+
+1.0r1 (22nd March 2004)
+-----------------------
+This is the first SDL port of Laser. All future
+development of Laser will be focused on the SDL
+version. This is to aid with the ease of system
+portability.
+
+Discrete logic games are no longer available as
+a result of the change over.
+
+0.20 (30th July 2002)
+---------------------
+First official Win32 port of Laser, by ss_teven.
+Thanks to Atani for the previous Win32 port. :D
+
+Most everything from the pre-releases (MetaFox, ss_teven)
+
+Added discrete logic games (MetaFox):
+
+Pong - Keys are:
+1 to start
+Player 1 (Up: W, Down: S)
+Player 2 (Up: 8 on the NumPad, Down: 2 on the Numpad)
+
+Pong Doubles - a really fun game. :D Keys are:
+1 to start
+Player 1 (Up: W, Down: S)
+Player 2 (Up: Y, Down: H)
+Player 3 (Up: P, Down: ;)
+Player 4 (Up: 8 on the NumPad, Down: 2 on the Numpad)
+
+Thanks to <a href="http://www.consolevision.com/covers">Syngori</a> for the button layout. :P
+
+0.18a (31st October 2001)
+-------------------------
+Speed throttler for those of us with a system faster than a Pentium I :P (MetaFox)
+Sound back in for the 8080 games - enable with -sound as always :) (MetaFox)
+
+0.18 (31st October 2001)
+------------------------
+Rewrite of Laser to use a driver system (ss_teven)
+Added a Scramble driver (ss_teven)
+The End (Stern) is now playable (ss_teven)
+Preliminary The End - The Ship does not move (ss_teven)
+Preliminary Frogger - bootleg on Scramble hardware.  Coin Inputs are not working properly (MetaFox)
+Preliminary Atlantis.  Coin Inputs are not working properly (ss_teven)
+Polaris is now playable (ss_teven)
+Added most of the 8080 games back in to work in Laser 0.18 (ss_teven, MetaFox)
+
+0.17 (27th October 2001)
+------------------------
+Space Invaders (TV Version) is now playable using a sloppy hack with invaders roms
+Test menu can be accessed by running with Laser -test
+Changed spaceatt romset to match MAME's
+Added Space Attack II
+Added Super Invaders (once again a sloppy hack using Invaders roms)
+Added Super Invaders (Zenitone-Microsec)
+Added Super Invaders (EMAG)
+Added Alien Invasion Part II
+Added Ozma Wars (Set 2)
+
+Laser SE (2nd Febrary 2001)
+---------------------------
+Works with the frontend called Hiryu, which is included.
+These games are now supported:
+Ozma Wars 
+Solar Fight 
+Space Phantoms 
+Star Wars Space Chaser is now fully playable 
+Lupin III is now fully playable 
+Sound is now enabled by default, use -nosound to turn it off 
+Joystick is also enabled by default, use -nojoy to turn it off 
+
+
+0.15 (24th December 2000)
+-------------------------
+Lupin III is now playable - I forgot to return(bValue); in Laser 0.14 
+Christmas Present - use -sound to get a Christmas tune as the background for your chosen game 
+Use -sound -bahhumbug to turn off the song and revert to the arcade sounds 
+And of course, just don't put -sound at all if you want to play in silence 
+
+0.14 (13th December 2000)
+-------------------------
+Added support for Clowns and Lupin III (both unplayable)
+
+0.13 (27th October 2000)
+------------------------
+Added support for two new ROMsets:
+Moon Base
+Space Invaders Part II (Taito)
+Fixed the credit counter to be insync with MAME
+
+0.12 (25th October 2000)
+------------------------
+Changed the colors in Space Invaders Deluxe to match those in MAME
+
+0.11a (20th September 2000)
+---------------------------
+Complete Sound in Space Invaders (the saucer sound was missing before)
+
+0.11 (19th September 2000)
+--------------------------
+Sound must be enabled with -sound at the prompt now. 
+4 Player Bowling is now playable (with graphics errors). I couldn't figure out how to play it, so I only assume it's playable. I couldn't figure it out in MAME either :) 
+
+0.10 (6th August 2000)
+----------------------
+Sound Support via Samples
+
+0.9 (31st July 2000)
+--------------------
+Added a 'Paused' feature
+Implemented screen flipping for horizontal games
+joystick can now be chosen with -joy at the command line
+Now has Color/Black and white graphics drivers - the B/W only games no longer have three toned striped to them.
+
+These games are now supported:
+- Cosmic Monster
+- Laser
+- Space King
+- Space War 3
+
+Preliminary, not playable:
+- Space Invaders (TV Version)
+- Checkmate
+
+0.8 (27th July 2000)
+--------------------
+Fixed the graphics errors, and made a speed increase thanks to Spaders by Tony Toole
+
+These games are now supported:
+- Lunar Rescue
+- Galaxy Wars
+- Destination Earth
+- Invaders Revenge
+
+0.7 (26th July 2000)
+--------------------
+Finally got colors to work in Space Invaders
+Boot Hill and Space Invaders Deluxe are added, but do not work currently - 
+I'll work on this for the next release
+
+0.21 Beta 1 (25th July 2000)
+---------------------------- 
+Special release in celebration of David Lloyd of OverClocked's birthday.
+Cleaned up the source code 
+Added Space Attack II
+
+0.6 (5th June 2000)
+-------------------
+I began porting the Z80 core over to Richard Mitten's excellent RAZE Z80 emulator.
+
+0.5 (29th May 2000)
+-------------------
+Thanks to Bart Trzynadlowski again [I borrowed some code from Genital :)]
+Laser now uses the standard Laser gamename -option command line.
+
+0.4 (1st April 2000)
+--------------------
+Beginning of Multi Game Support - Although not true MultiGame
+Now supports Space Invaders and its clones Super Earth Invasion, and Space Invaders (Taito) - Removed the sound code because it was too buggy 
+
+0.3 (1st February 2000)
+-----------------------
+Beginning of Sound Support - Crude, not very accurate, and 
+not complete
+
+0.2a (31st January 2000)
+------------------------
+Fixed a bug where the joystick button stayed down, preventing keyboard usage.
+
+Laser 0.2 (31st January 2000)
+-----------------------------
+Minor Source Code Changes.  Bart Trzynadlowski e-mailed me about a more efficient way to display the sprites, which resulted in a smaller file size and possibly a minor speed increase.
+
+Laser 0.1 (30th January 2000)
+-----------------------------
+First Release of Laser

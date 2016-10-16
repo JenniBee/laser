@@ -3,7 +3,7 @@
 /**                         M6502.c                         **/
 /**                                                         **/
 /** This file contains implementation for 6502 CPU. Don't   **/
-/** forget to provide driver->rdmem(), driver->wrmem(), driver->loop(), and   **/
+/** forget to provide driver.rdmem(), driver.wrmem(), driver.loop(), and   **/
 /** possibly Op6502() functions to accomodate the emulated  **/
 /** machine's architecture.                                 **/
 /**                                                         **/
@@ -17,7 +17,7 @@
 #include "cpu.h"
 #include "osiline.h"
 
-#include "M6502.h"
+#include "m6502.h"
 #include "laser.h"
 #include "Tables.h"
 
@@ -45,7 +45,7 @@ INLINE byte Op6502(register word A) { return(Page[A>>13][A&0x1FFF]); }
 /** the functions of Rd6502().                              **/
 /*************************************************************/
 #ifndef FAST_RDOP
-#define Op6502(A) driver->rdmem(A)
+#define Op6502(A) driver.rdmem(A)
 #endif
 
 /** Addressing Methods ***************************************/
@@ -66,35 +66,35 @@ INLINE byte Op6502(register word A) { return(Page[A>>13][A&0x1FFF]); }
 /** Reading From Memory **************************************/
 /** These macros calculate address and read from it.        **/
 /*************************************************************/
-#define MR_Ab(Rg)       MC_Ab(J);Rg=driver->rdmem(J.W)
+#define MR_Ab(Rg)       MC_Ab(J);Rg=driver.rdmem(J.W)
 #define MR_Im(Rg)	Rg=Op6502(R->PC.W++)
-#define MR_Zp(Rg)       MC_Zp(J);Rg=driver->rdmem(J.W)
-#define MR_Zx(Rg)       MC_Zx(J);Rg=driver->rdmem(J.W)
-#define MR_Zy(Rg)       MC_Zy(J);Rg=driver->rdmem(J.W)
-#define MR_Ax(Rg)       MC_Ax(J);Rg=driver->rdmem(J.W)
-#define MR_Ay(Rg)       MC_Ay(J);Rg=driver->rdmem(J.W)
-#define MR_Ix(Rg)       MC_Ix(J);Rg=driver->rdmem(J.W)
-#define MR_Iy(Rg)       MC_Iy(J);Rg=driver->rdmem(J.W)
+#define MR_Zp(Rg)       MC_Zp(J);Rg=driver.rdmem(J.W)
+#define MR_Zx(Rg)       MC_Zx(J);Rg=driver.rdmem(J.W)
+#define MR_Zy(Rg)       MC_Zy(J);Rg=driver.rdmem(J.W)
+#define MR_Ax(Rg)       MC_Ax(J);Rg=driver.rdmem(J.W)
+#define MR_Ay(Rg)       MC_Ay(J);Rg=driver.rdmem(J.W)
+#define MR_Ix(Rg)       MC_Ix(J);Rg=driver.rdmem(J.W)
+#define MR_Iy(Rg)       MC_Iy(J);Rg=driver.rdmem(J.W)
 
 /** Writing To Memory ****************************************/
 /** These macros calculate address and write to it.         **/
 /*************************************************************/
-#define MW_Ab(Rg)       MC_Ab(J);driver->wrmem(J.W,Rg)
-#define MW_Zp(Rg)       MC_Zp(J);driver->wrmem(J.W,Rg)
-#define MW_Zx(Rg)       MC_Zx(J);driver->wrmem(J.W,Rg)
-#define MW_Zy(Rg)       MC_Zy(J);driver->wrmem(J.W,Rg)
-#define MW_Ax(Rg)       MC_Ax(J);driver->wrmem(J.W,Rg)
-#define MW_Ay(Rg)       MC_Ay(J);driver->wrmem(J.W,Rg)
-#define MW_Ix(Rg)       MC_Ix(J);driver->wrmem(J.W,Rg)
-#define MW_Iy(Rg)       MC_Iy(J);driver->wrmem(J.W,Rg)
+#define MW_Ab(Rg)       MC_Ab(J);driver.wrmem(J.W,Rg)
+#define MW_Zp(Rg)       MC_Zp(J);driver.wrmem(J.W,Rg)
+#define MW_Zx(Rg)       MC_Zx(J);driver.wrmem(J.W,Rg)
+#define MW_Zy(Rg)       MC_Zy(J);driver.wrmem(J.W,Rg)
+#define MW_Ax(Rg)       MC_Ax(J);driver.wrmem(J.W,Rg)
+#define MW_Ay(Rg)       MC_Ay(J);driver.wrmem(J.W,Rg)
+#define MW_Ix(Rg)       MC_Ix(J);driver.wrmem(J.W,Rg)
+#define MW_Iy(Rg)       MC_Iy(J);driver.wrmem(J.W,Rg)
 
 /** Modifying Memory *****************************************/
 /** These macros calculate address and modify it.           **/
 /*************************************************************/
-#define MM_Ab(Cmd)      MC_Ab(J);I=driver->rdmem(J.W);Cmd(I);driver->wrmem(J.W,I)
-#define MM_Zp(Cmd)      MC_Zp(J);I=driver->rdmem(J.W);Cmd(I);driver->wrmem(J.W,I)
-#define MM_Zx(Cmd)      MC_Zx(J);I=driver->rdmem(J.W);Cmd(I);driver->wrmem(J.W,I)
-#define MM_Ax(Cmd)      MC_Ax(J);I=driver->rdmem(J.W);Cmd(I);driver->wrmem(J.W,I)
+#define MM_Ab(Cmd)      MC_Ab(J);I=driver.rdmem(J.W);Cmd(I);driver.wrmem(J.W,I)
+#define MM_Zp(Cmd)      MC_Zp(J);I=driver.rdmem(J.W);Cmd(I);driver.wrmem(J.W,I)
+#define MM_Zx(Cmd)      MC_Zx(J);I=driver.rdmem(J.W);Cmd(I);driver.wrmem(J.W,I)
+#define MM_Ax(Cmd)      MC_Ax(J);I=driver.rdmem(J.W);Cmd(I);driver.wrmem(J.W,I)
 
 /** Other Macros *********************************************/
 /** Calculating flags, stack, jumps, arithmetics, etc.      **/
@@ -102,7 +102,7 @@ INLINE byte Op6502(register word A) { return(Page[A>>13][A&0x1FFF]); }
 #define M_FL(Rg)	R->P=(R->P&~(Z_FLAG|N_FLAG))|ZNTable[Rg]
 #define M_LDWORD(Rg)	Rg.B.l=Op6502(R->PC.W++);Rg.B.h=Op6502(R->PC.W++)
 
-#define M_PUSH(Rg)      driver->wrmem(0x0100|R->S,Rg);R->S--
+#define M_PUSH(Rg)      driver.wrmem(0x0100|R->S,Rg);R->S--
 #define M_POP(Rg)	R->S++;Rg=Op6502(0x0100|R->S)
 #define M_JR		R->PC.W+=(offset)Op6502(R->PC.W)+1;R->ICount--
 
@@ -178,8 +178,8 @@ void Reset6502(M6502 *R)
   R->A=R->X=R->Y=0x00;
   R->P=Z_FLAG|R_FLAG;
   R->S=0xFF;
-  R->PC.B.l=driver->rdmem(0xFFFC);
-  R->PC.B.h=driver->rdmem(0xFFFD);   
+  R->PC.B.l=driver.rdmem(0xFFFC);
+  R->PC.B.h=driver.rdmem(0xFFFD);   
   R->ICount=R->IPeriod;
   R->IRequest=INT_NONE;
   R->AfterCLI=0;
@@ -223,13 +223,13 @@ void Int6502(M6502 *R,byte Type)
     M_PUSH(R->P&~B_FLAG);
     R->P&=~D_FLAG;
     if(Type==INT_NMI) J.W=0xFFFA; else { R->P|=I_FLAG;J.W=0xFFFE; }
-    R->PC.B.l=driver->rdmem(J.W++);
-    R->PC.B.h=driver->rdmem(J.W);
+    R->PC.B.l=driver.rdmem(J.W++);
+    R->PC.B.h=driver.rdmem(J.W);
   }
 }
 
 /** Run6502() ************************************************/
-/** This function will run 6502 code until driver->loop() call  **/
+/** This function will run 6502 code until driver.loop() call  **/
 /** returns INT_QUIT. It will return the PC at which        **/
 /** emulation stopped, and current register values in R.    **/
 /*************************************************************/
@@ -268,7 +268,7 @@ word Run6502(M6502 *R)
       }
       else
       {
-        I=driver->loop(R);            /* Call the periodic handler */
+        I=driver.loop(R);            /* Call the periodic handler */
         R->ICount=R->IPeriod;     /* Reset the cycle counter   */
       }
 
