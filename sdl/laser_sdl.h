@@ -25,7 +25,7 @@ void exit_laser(int code);              /* exit the program */
 void pause_laser();                           /* pause game */
 void sys_interrupt();
 char *get_keyboard(void);
-int main(int argc, char *argv[]);
+int SDL_main(int argc, char *argv[]);
 int FindOption(char *option, int p, int h, int u, int argc, char **argv);
 int machine_init();
 int machine_gfx(int w, int h);

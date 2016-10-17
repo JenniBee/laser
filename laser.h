@@ -15,8 +15,8 @@
 #include "romlist.h"
 
 #define LASER_MAJOR 1
-#define LASER_MINOR 01
-#define LASER_VERSION "1.0r1"
+#define LASER_MINOR 03
+#define LASER_VERSION "1.03"
 
 byte *RAM;
 

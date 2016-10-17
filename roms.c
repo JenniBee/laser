@@ -28,13 +28,23 @@ tagRomList cosmicmoRom[] = {
 };
 
 tagRomList cosmicm2Rom[] = {
-  {"cosmicm2/3907.bin",      0x0000, 0x0400, 7 },
+  {"cosmicm2/3907.bin",        0x0000, 0x0400, 7 },
   {"cosmicmo/cosmicmo.2",      0x0400, 0x0400, 0 },
   {"cosmicmo/cosmicmo.3",      0x0800, 0x0400, 0 },
   {"cosmicmo/cosmicmo.4",      0x0c00, 0x0400, 0 },
-  {"cosmicm2/3906.bin",      0x4000, 0x0400, 0 },
+  {"cosmicm2/3906.bin",        0x4000, 0x0400, 0 },
   {"cosmicmo/cosmicmo.6",      0x4400, 0x0400, 0 },
   {"cosmicmo/cosmicmo.7",      0x4800, 0x0400, 0 }
+};
+
+tagRomList desterthRom[] = {
+  {"desterth/36_h.bin",        0x0000, 0x0800, 7 },
+  {"desterth/35_g.bin",        0x0800, 0x0800, 0 },
+  {"desterth/34_f.bin",        0x1000, 0x0800, 0 },
+  {"desterth/33_e.bin",        0x1800, 0x0800, 0 },
+  {"desterth/32_d.bin",        0x4000, 0x0800, 0 },
+  {"desterth/31_c.bin",        0x4800, 0x0800, 0 },
+  {"desterth/42_b.bin",        0x5000, 0x0800, 0 }
 };
 
 tagRomList galxwarstRom[] = {

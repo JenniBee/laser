@@ -5,6 +5,7 @@
 
 #include "laser.h"
 #include "SDL_framerate.h"
+#undef main
 
 int ldebug = 0;
 laserDriver driver;
@@ -104,7 +105,7 @@ void exit_msg() {
         printf("     Z80 Core by Marat Fayzullin\r\n");
         printf("     6502 Core by Marat Fayzullin and Alex Krasivsky\r\n");
         printf("Current Project Lead:\r\n");
-        printf("     MetaFox\r\n");
+        printf("     Jennifer McMurray\r\n");
         printf("Former Co-Project Lead:\r\n");
         printf("     Steven Harris\r\n");
         printf("\r\n");
@@ -280,7 +281,6 @@ void putpixel(SDL_Surface *surface, int x, int y, int c)
 
 //extern tagGameList *gameList[];
 
-
 int main(int argc, char *argv[]) {
 
         if (argc < 2) {
@@ -293,7 +293,7 @@ int main(int argc, char *argv[]) {
                 printf("\r\n  1               Player 1\r\n");
                 printf("  2               Player 2\r\n");
                 printf("  3               Insert Coin\r\n");
-                printf("  CTRL            Fire\r\n");
+                printf("  SPACE           Fire\r\n");
                 printf("  Up/Down         Up/Down\r\n");
                 printf("  Left/Right      Left/Right\r\n");
                 printf("  F5              Save State\r\n");
@@ -324,6 +324,10 @@ int main(int argc, char *argv[]) {
 	if(ldebug) printf("Debug: driver.shutdown()\r\n");
         driver.shutdown();
 
+        return(0);
+}
+
+int SDL_main(int argc, char *argv[]) {
         return(0);
 }
 
